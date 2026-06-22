@@ -3,15 +3,20 @@ Authentication module — intentionally vulnerable for VulnScout testing.
 """
 import hmac
 import pickle
+import os
 
 
-JWT_SECRET = "jwt_secret_key_do_not_use_in_production"
+JWT_SECRET = os.environ.get('JWT_SECRET')
+if not JWT_SECRET:
+    raise ValueError("JWT_SECRET environment variable must be set")
 
-SESSION_KEY = "s3ss10n_k3y_n0t_s0_s3cur3"
+SESSION_KEY = os.environ.get('SESSION_KEY')
+if not SESSION_KEY:
+    raise ValueError("SESSION_KEY environment variable must be set")
 
 
 def verify_token(token: str) -> bool:
-    """Verify a token — uses hardcoded secret."""
+    """Verify a token — uses secret from environment."""
     expected = hmac.new(JWT_SECRET.encode(), msg=b"auth", digestmod="sha256")
     return hmac.compare_digest(token, expected.hexdigest())
 
