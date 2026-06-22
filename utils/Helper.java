@@ -1,10 +1,11 @@
 /**
- * Utility helpers — intentionally vulnerable for VulnScout testing.
+ * Utility helpers — fixed for VulnScout testing.
  */
 public class Helper {
 
-    private static final String DB_PASSWORD = "oracle_prod_p@ss!";
-    private static final String SECRET_TOKEN = "eyJhbGciOiJIUzI1NiJ9.secret";
+    // Credentials should be loaded from environment variables or a secure vault
+    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+    private static final String SECRET_TOKEN = System.getenv("SECRET_TOKEN");
 
     public static void backup(String table) throws Exception {
         // OS Command Injection
