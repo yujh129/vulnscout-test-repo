@@ -5,8 +5,8 @@
 const express = require("express");
 const app = express();
 
-const API_TOKEN = "sk-live-abcdef1234567890abcdef1234567890abcdef12";
-const ADMIN_PASSWORD = "admin123!";
+const API_TOKEN = process.env.API_TOKEN || "";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 
 app.use(express.json());
 
