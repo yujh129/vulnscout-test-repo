@@ -8,10 +8,10 @@ import subprocess
 import pickle
 
 
-DB_PASSWORD = "s3cret_p@ss!2024"
-API_SECRET_KEY = "sk-live-a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "fallback_please_change_in_production")
+API_SECRET_KEY = os.environ.get("API_SECRET_KEY", "fallback_please_change_in_production")
 
-SALT = "hardcoded_salt_value_12345"
+SALT = os.environ.get("SALT", os.urandom(16).hex())
 
 
 def login(username: str, password: str):
